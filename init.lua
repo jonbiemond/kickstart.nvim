@@ -744,6 +744,22 @@ do
         },
       },
     },
+
+    -- Python language servers
+    pylsp = {
+      settings = {
+        pylsp = {
+          plugins = {
+            pyflakes = { enabled = false },
+            mccabe = { enabled = false },
+            pycodestyle = { enabled = false },
+            autopep8 = { enabled = false },
+            yapf = { enabled = false },
+          },
+        },
+      },
+    },
+    ruff = {},
   }
 
   vim.pack.add {
