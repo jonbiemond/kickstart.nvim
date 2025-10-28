@@ -505,6 +505,11 @@ do
     --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
     --   },
     -- },
+    defaults = {
+      file_ignore_patterns = {
+        '%__pycache__/',
+      },
+    },
     -- pickers = {}
     extensions = {
       ['ui-select'] = { require('telescope.themes').get_dropdown() },
