@@ -588,6 +588,20 @@ do
 
   -- Shortcut for searching your Neovim configuration files
   vim.keymap.set('n', '<leader>sn', function() builtin.find_files { cwd = vim.fn.stdpath 'config', follow = true } end, { desc = '[S]earch [N]eovim files' })
+
+  vim.keymap.set('n', '<leader>sp', function()
+    builtin.live_grep {
+      glob_pattern = '*.py',
+      prompt_title = 'Live Grep in Python Files',
+    }
+  end, { desc = '[S]earch in [P]ython Files' })
+
+  vim.keymap.set('n', '<leader>st', function()
+    builtin.live_grep {
+      glob_pattern = '*.html',
+      prompt_title = 'Live Grep in HTML Files',
+    }
+  end, { desc = '[S]earch in HTML [T]emplate Files' })
 end
 
 -- ============================================================
