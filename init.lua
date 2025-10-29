@@ -818,6 +818,30 @@ do
       },
     },
     ruff = {},
+
+    -- Grammar and spell checking
+    ltex = {
+      settings = {
+        ltex = {
+          enabled = {
+            'bibtex',
+            'gitcommit',
+            'markdown',
+            'org',
+            'tex',
+            'restructuredtext',
+            'rsweave',
+            'latex',
+            'quarto',
+            'rmd',
+            'context',
+            'mail',
+            'plaintext',
+          },
+          language = 'en-CA',
+        },
+      },
+    },
   }
 
   vim.pack.add {
