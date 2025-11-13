@@ -786,7 +786,6 @@ do
         ltex = {
           enabled = {
             'bibtex',
-            'gitcommit',
             'markdown',
             'org',
             'tex',
