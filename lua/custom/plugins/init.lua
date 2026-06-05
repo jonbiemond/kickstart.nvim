@@ -28,4 +28,7 @@ return {
     ---@type render.md.UserConfig
     opts = {},
   },
+  {
+    'tpope/vim-dispatch',
+  },
 }
