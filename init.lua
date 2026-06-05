@@ -568,6 +568,17 @@ do
     end,
   })
 
+  -- Toggle to enable/disable autoformat on save
+  vim.keymap.set('n', '<leader>tf', function()
+    if vim.g.disable_autoformat then
+      vim.cmd 'FormatEnable'
+      vim.notify 'Enabled autoformat globally'
+    else
+      vim.cmd 'FormatDisable'
+      vim.notify 'Disabled autoformat globally'
+    end
+  end, { desc = '[T]oggle Auto[F]ormat' })
+
   -- Override default behavior and theme when searching
   vim.keymap.set('n', '<leader>/', function()
     -- You can pass additional configuration to Telescope to change the theme, layout, etc.
@@ -778,7 +789,11 @@ do
         },
       },
     },
-    ruff = {},
+    ruff = {
+      settings = {
+        autoformat = false,
+      },
+    },
 
     -- Grammar and spell checking
     ltex = {
@@ -867,6 +882,30 @@ do
       -- You can use 'stop_after_first' to run the first available formatter from the list
       -- javascript = { "prettierd", "prettier", stop_after_first = true },
     },
+    format_on_save = function(bufnr)
+      -- Disable with a global or buffer-local variable
+      if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+        return
+      end
+      return { timeout_ms = 500, lsp_format = 'fallback' }
+    end,
+    vim.api.nvim_create_user_command('FormatDisable', function(args)
+      if args.bang then
+        -- FormatDisable! will disable formatting just for this buffer
+        vim.b.disable_autoformat = true
+      else
+        vim.g.disable_autoformat = true
+      end
+    end, {
+      desc = 'Disable autoformat-on-save',
+      bang = true,
+    }),
+    vim.api.nvim_create_user_command('FormatEnable', function()
+      vim.b.disable_autoformat = false
+      vim.g.disable_autoformat = false
+    end, {
+      desc = 'Re-enable autoformat-on-save',
+    }),
   }
 
   vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format { async = true } end, { desc = '[F]ormat buffer' })
