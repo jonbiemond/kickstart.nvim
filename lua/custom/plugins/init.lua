@@ -13,23 +13,19 @@ for file_name, type in vim.fs.dir(plugins_dir, { follow = true }) do
   end
 end
 
----@module 'lazy'
----@type LazySpec
-return {
-  {
-    'christoomey/vim-tmux-navigator',
-    lazy = false,
-  },
-  {
-    'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-    ---@module 'render-markdown'
-    ---@type render.md.UserConfig
-    opts = {},
-  },
-  {
-    'tpope/vim-dispatch',
-  },
-}
+local function gh(repo) return 'https://github.com/' .. repo end
+
+-- ============================================================
+-- Custom Plugins (vim.pack)
+-- ============================================================
+
+-- Seamless navigation between tmux panes and vim splits
+vim.pack.add { gh 'christoomey/vim-tmux-navigator' }
+
+-- Asynchronous build and test dispatcher
+vim.pack.add { gh 'tpope/vim-dispatch' }
+
+-- Markdown rendering in Neovim buffers
+-- Note: nvim-treesitter and mini.nvim are already installed in kickstart's init.lua
+vim.pack.add { gh 'MeanderingProgrammer/render-markdown.nvim' }
+require('render-markdown').setup {}
