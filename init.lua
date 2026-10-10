@@ -549,6 +549,7 @@ do
     defaults = {
       file_ignore_patterns = {
         '%__pycache__/',
+        '^%.git/',
       },
     },
     pickers = {
