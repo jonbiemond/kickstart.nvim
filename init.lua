@@ -1094,12 +1094,15 @@ do
     -- Open files with all folds expanded
     vim.wo.foldenable = false
 
+    -- Languages for which to skip treesitter indent and use Vim's builtin script instead
+    local disable_indent = { htmldjango = true }
+
     -- Check if treesitter indentation is available for this language, and if so enable it
     -- in case there is no indent query, the indentexpr will fallback to the vim's built in one
     local has_indent_query = vim.treesitter.query.get(language, 'indents') ~= nil
 
     -- Enable treesitter based indentation
-    if has_indent_query then vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()" end
+    if has_indent_query and not disable_indent[language] then vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()" end
   end
 
   local available_parsers = require('nvim-treesitter').get_available()
