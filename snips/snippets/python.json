@@ -1,0 +1,16 @@
+{
+    "logger": {
+        "prefix": "logger",
+        "body": "logger = logging.getLogger(__name__)",
+        "description": "Default logger"
+    },
+    "Init override method": {
+        "prefix": "defio",
+        "body": [
+            "def __init__(self, *args, **kwargs):",
+            "\tsuper().__init__(*args, **kwargs)",
+            "\t${1:pass}"
+        ],
+        "description": "Override init method on subclass"
+    }
+}
